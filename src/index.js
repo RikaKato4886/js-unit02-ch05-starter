@@ -10,16 +10,16 @@ class TranslationApp {
     //現在のLocaleに合わせて、polyglotにメッセージをセットします。メッセージのセットにはpolyglot.extend()を利用します。
     if (this.currentLocate === "jp"){
       this.polyglot.extend({
-        "hello" : "こんにちは、世界"
+        "messageJP" : "こんにちは、世界"
       });
       console.log(this.currentLocate)
-      return this.polyglot.t("hello")
+      return this.polyglot.t("messageJP")
     } else {
       this.polyglot.extend({
-        "メッセージ" : "Hello, World"
+        "messageEn" : "Hello, World"
       });
       console.log(this.currentLocate)
-      return this.polyglot.t("メッセージ")
+      return this.polyglot.t("messageEn")
     }
   }
 
