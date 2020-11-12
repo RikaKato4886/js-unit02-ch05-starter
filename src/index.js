@@ -1,25 +1,25 @@
 import Polyglot from 'node-polyglot';
 
 class TranslationApp {
-  constructor(props) {
+  constructor() {
     this.polyglot = new Polyglot();
-    this.messageJp = props.messageJp;
-    this.messageEn = props.messageEn;
     this.currentLocate = "jp";
   }
 
   setup() {
     //現在のLocaleに合わせて、polyglotにメッセージをセットします。メッセージのセットにはpolyglot.extend()を利用します。
-    if (this.currentLocate === "ja"){
+    if (this.currentLocate === "jp"){
       this.polyglot.extend({
-        "this.messageEn" : this.messageJp
+        "hello" : "こんにちは、世界"
       });
-      return this.polyglot.t("this.messageEn")
+      console.log(this.currentLocate)
+      return this.polyglot.t("hello")
     } else {
       this.polyglot.extend({
-        "this.messageJp" : this.messageEn
+        "メッセージ" : "Hello, World"
       });
-      return this.polyglot.t("this.messageJp")
+      console.log(this.currentLocate)
+      return this.polyglot.t("メッセージ")
     }
   }
 
@@ -27,10 +27,10 @@ class TranslationApp {
     //ボタンにセットされたdata-localeを元に現在のlocaleを変更します。
     if (e.target.dataset.locale === "ja"){
       this.currentLocate = "ja";
-      console.log('If文:jaが押された場合' + this.currentLocate)
+      console.log(`日本語ボタン: currentLocate: ${this.currentLocate}`)
     } else {
       this.currentLocate = "en";
-      console.log('Else: enが押された場合' + this.currentLocate)
+      console.log(`英語ボタン: currentLocate: ${this.currentLocate}`)
     }
   }
 
@@ -43,12 +43,7 @@ class TranslationApp {
   }
 }
 
-let app = new TranslationApp({
-  messageJp: "こんにちは、世界",
-  messageEn: "Hello World"
-})
-
-app.showMessage();
+let app = new TranslationApp;
 
 {
   const button1 = document.getElementById('button1');
