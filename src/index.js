@@ -3,60 +3,51 @@ import Polyglot from 'node-polyglot';
 class TranslationApp {
   constructor() {
     this.polyglot = new Polyglot();
-    this.currentLocate = "jp"
+    this.currentLocale = "en";
+    // this.inputLocale = localStorage.setItem("currentLocate", this.currentLocale)
+    // this.selectedLocale = localStorage.getItem("currentLocate") || 'ja'
     // localStorageを使うと、デフォルト言語の指定と、選択された言語の取得ができそうですね
   }
 
   setup() {
     //現在のLocaleに合わせて、polyglotにメッセージをセットします。メッセージのセットにはpolyglot.extend()を利用します。
-    if (this.currentLocate === "jp"){
+    if (this.currentLocale === "ja"){
       this.polyglot.extend({
-        "message":"こんにちは、世界"
+        "message":"こんにちは、世界",
       });
     } else {
       this.polyglot.extend({
-        "message":"Hello, World"
+        "message":"Hello, World",
       });
     }
   }
 
   // updateLocale(e) {
   //   //ボタンにセットされたdata-localeを元に現在のlocaleを変更します。
-  //   if (e.target.dataset.locale === "ja"){//日本語ボタンが押されたら
-  //     return localStorage.setItem(this.currentLocate, "ja");
+  //   console.log(e.target.dataset.locale)
+  //   if (e.target.dataset.locale === "ja"){//日本語ボタンが押された
+  //     this.currentLocate = "ja"
   //     console.log(`日本語ボタン: currentLocate: ${this.currentLocate}`)
   //   } else {
   //     this.currentLocate = "en";
-  //     return localStorage.setItem(this.currentLocate, "en");
   //     console.log(`英語ボタン: currentLocate: ${this.currentLocate}`)
   //   }
+  //   console.log(this.currentLocate)
   // }
 
   showMessage() {
     //mainというidがセットされた要素の下にh1タグで現在のlocaleに応じて、メッセージを表示します。
-    const btnJp = document.getElementById('button1')
-    const btnEn = document.getElementById('button2')
     const mainEl = document.getElementById('main')
     let h1 = document.createElement('h1');
+    this.setup();
+    h1.innerHTML = this.polyglot.t("message");
 
-    btnJp.addEventListener('click', ()=>{
-      console.log(this.polyglot)
-      h1.innerHTML = this.polyglot.t("message");
-
-      mainEl.appendChild(h1)
-    })
-    btnEn.addEventListener('click', ()=>{
-      console.log(this.polyglot)
-      h1.innerHTML = this.polyglot.t("aa");
-      mainEl.appendChild(h1)
-    })
-
+    mainEl.appendChild(h1);
   }
 }
 
-let app = new TranslationApp;
+let app = new TranslationApp();
 app.showMessage();
-
 
 // {
 //   const button1 = document.getElementById('button1');
