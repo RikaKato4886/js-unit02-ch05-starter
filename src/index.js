@@ -3,7 +3,7 @@ import Polyglot from 'node-polyglot';
 class TranslationApp {
   constructor() {
     this.polyglot = new Polyglot();
-    this.currentLocale = "en";
+    this.currentLocale = "jp";
     // this.inputLocale = localStorage.setItem("currentLocate", this.currentLocale)
     // this.selectedLocale = localStorage.getItem("currentLocate") || 'ja'
     // localStorageを使うと、デフォルト言語の指定と、選択された言語の取得ができそうですね
