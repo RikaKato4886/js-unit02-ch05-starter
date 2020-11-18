@@ -3,8 +3,7 @@ import Polyglot from 'node-polyglot';
 class TranslationApp {
   constructor() {
     this.polyglot = new Polyglot();
-    this.currentLocale = localStorage.getItem(this.currentLocale || 'ja');
-    // localStorage.getItem()を使用する路線で合ってます。ORの演算子を使って、デフォルトで使用できる言語の値と、その時に取得できる言語の値をここで初期値として指定しておくと使いやすそ
+    this.currentLocale = localStorage.getItem('locale' || 'ja');
   }
 
   setup() {
@@ -25,17 +24,13 @@ class TranslationApp {
     if (e.target.dataset.locale === "ja"){//日本語ボタンが押された
       this.currentLocale = "ja";
       localStorage.setItem("locale", this.currentLocale)
-      // console.log(this.currentLocale)
-      // this.currentLocate = "ja"
     } else {
       this.currentLocale = "en";
       localStorage.setItem("locale", this.currentLocale)
-      // console.log(this.currentLocale)
     }
   }
 
   showMessage() {
-    //mainというidがセットされた要素の下にh1タグで現在のlocaleに応じて、メッセージを表示します。
     const mainEl = document.getElementById('main')
     mainEl.innerHTML = `
     <h1>
@@ -43,10 +38,11 @@ class TranslationApp {
     <h1>
     `
   }
-}
+};
 
 let app = new TranslationApp();
-app.setup()
+app.setup();
+app.showMessage();
 
 {
   const button1 = document.getElementById('button1');
