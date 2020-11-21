@@ -4,6 +4,7 @@ class TranslationApp {
   constructor() {
     this.polyglot = new Polyglot();
     this.currentLocale = localStorage.getItem("locale" || "ja");
+    this.updateLocale = this.updateLocale.bind(this);
   }
 
   setup() {
@@ -24,10 +25,12 @@ class TranslationApp {
     const clickedlocale = e.target.dataset.locale;
     localStorage.setItem("locale", clickedlocale);
     this.currentLocale = clickedlocale;
+    console.log(this.currentLocale)
     this.showMessage();
   }
 
   showMessage() {
+    this.setup()
     const mainEl = document.getElementById('main');
     mainEl.innerHTML = `
     <h1>
@@ -35,13 +38,14 @@ class TranslationApp {
     <h1>
     `;
   }
+
 };
 
-const app = new TranslationApp();
-app.setup();
-app.showMessage();
-
 {
+  const app = new TranslationApp();
+  // console.log(app)
+  // app.setup();
+  app.showMessage();
   const button1 = document.getElementById('button1');
   button1.addEventListener("click", app.updateLocale);
 
